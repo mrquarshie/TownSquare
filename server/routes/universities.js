@@ -9,11 +9,27 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const universities = await University.find({ isActive: true })
-      .sort({ name: 1 });
-    res.json(universities);
+      .sort({ name: 1 })
+      .select('name');
+    
+    // Return just the names as an array of strings
+    const universityNames = universities.map(uni => uni.name);
+    res.json(universityNames);
   } catch (error) {
     console.error('Get universities error:', error);
-    res.status(500).json({ message: 'Server error' });
+    // Fallback to hardcoded list if database fails
+    const fallbackUniversities = [
+      'University of Ghana',
+      'Kwame Nkrumah University of Science and Technology',
+      'University of Cape Coast',
+      'University of Education, Winneba',
+      'University for Development Studies',
+      'Ashesi University',
+      'Central University',
+      'University of Professional Studies',
+      'Ghana Technology University College'
+    ];
+    res.json(fallbackUniversities);
   }
 });
 

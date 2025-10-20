@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
+const { body, validationResult, sanitizeBody } = require('express-validator');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
@@ -22,7 +22,8 @@ router.post('/register', [
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
   body('role').isIn(['buyer', 'seller']).withMessage('Role must be either buyer or seller'),
   body('university').trim().notEmpty().withMessage('University is required'),
-  body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number')
+  body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number'),
+  sanitizeBody('*').escape()
 ], async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -76,7 +77,8 @@ router.post('/register', [
 // @access  Public
 router.post('/login', [
   body('email').isEmail().normalizeEmail().withMessage('Please provide a valid email'),
-  body('password').notEmpty().withMessage('Password is required')
+  body('password').notEmpty().withMessage('Password is required'),
+  sanitizeBody('*').escape()
 ], async (req, res) => {
   try {
     const errors = validationResult(req);
