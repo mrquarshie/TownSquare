@@ -37,7 +37,7 @@ const Register = () => {
         'University for Development Studies',
         'Ashesi University',
         'Central University',
-        'University of Professional Studies',
+        'University of Professional Studies, Accra',
         'Ghana Technology University College',
         'Ghana Institute of Management and Public Administration',
         'Presbyterian University College',
@@ -106,7 +106,7 @@ const Register = () => {
   return (
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Join Marketplace</h2>
+        <h2>Join TownSquare</h2>
         
         {error && <div className="error-message">{error}</div>}
         
