@@ -28,7 +28,17 @@ const Login = () => {
       await login(formData.email, formData.password);
       navigate('/');
     } catch (error) {
-      setError(error.response?.data?.message || 'Login failed');
+      console.error('Login error:', error);
+      if (error.response) {
+        // Server responded with error status
+        setError(error.response.data?.message || 'Login failed');
+      } else if (error.request) {
+        // Network error - server not responding
+        setError('Cannot connect to server. Please check your internet connection.');
+      } else {
+        // Other error
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
