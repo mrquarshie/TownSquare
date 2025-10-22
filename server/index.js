@@ -53,8 +53,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/townsquar
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log('MongoDB connection error:', err));
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => {
+  console.log('MongoDB connection error:', err);
+  console.log('Please make sure MongoDB is running on your system');
+  console.log('You can install MongoDB from: https://www.mongodb.com/try/download/community');
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

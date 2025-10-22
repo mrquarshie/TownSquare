@@ -27,10 +27,10 @@ const Navbar = () => {
           {user ? (
             <>
               <span>Welcome, {user.name}</span>
-              <span className={`user-tag ${user.userType}`}>
-                {user.userType}
+              <span className={`user-tag ${user.role}`}>
+                {user.role}
               </span>
-              {user.userType === 'seller' && (
+              {user.role === 'seller' && (
                 <>
                   <Link to="/add-item">Add Item</Link>
                   <Link to="/my-items">My Items</Link>

@@ -67,7 +67,23 @@ router.post('/register', [
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error during registration' });
+    
+    // Handle specific MongoDB errors
+    if (error.name === 'MongoNetworkError') {
+      return res.status(500).json({ 
+        message: 'Database connection failed. Please try again later.' 
+      });
+    }
+    
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        message: 'Invalid data provided. Please check your inputs.' 
+      });
+    }
+    
+    res.status(500).json({ 
+      message: 'Server error during registration. Please try again.' 
+    });
   }
 });
 

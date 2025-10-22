@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import AddItem from './pages/AddItem';
+import MyItems from './pages/MyItems';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/add-item" element={<AddItem />} />
+              <Route path="/my-items" element={<MyItems />} />
             </Routes>
           </main>
         </div>
